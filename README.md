@@ -24,7 +24,12 @@ The model is trained using a batch size of 64 with an initial learning rate of \
 
 ![Comparison of MAE](img/mp-steer-non-steer-comparison.png)
 ![MAE on Validation Dataset](img/mae-sh-sample-v3-upscaled-bw.png)
-![MAE Density](img/3dgs20-complex-level-mae-density.png)
+
+<div align="center">
+  <img src="img/3dgs20-complex-level-mae-density.png" width="300">
+</div>
+
+
 
 ## Limitations and Future Work
 
