@@ -27,43 +27,32 @@ $$\mathbf{a}\_{\tau\_i} = \lVert \mathbf{p}\_j - \mathbf{p}\_i \rVert$$
 
 
 
-## Computational implementation of composite harmonic expansions and CG TP
+## Implementation of composite harmonic expansions and CG TP
 
 Converting feature vectors $\mathbf{x}\_{\sigma\_i}$, attribute vectors $\mathbf{a}\_{\tau\_i}$, and ground truth vectors $\mathbf{y}\_{\sigma\_i}$ into composite steerable vectors necessitates the specification of the types $l$ of basis functions involved, as well as the multiplicities of each type. 
 A type-$l$ vector, characterised by its dimension $2l+1$, pertains to scalar quantities if $l=0$, to vectors if $l=1$, and to rank-2 tensors if $l=2$. Higher orders ($l > 2$) are generally less prevalent in practice. Importantly, multiple basis functions of an identical type $l$ may co-exist within the same representation. 
 
 For the effective implementation of composite steerable vectors and irreducible representations, we utilise the \textit{e3nn} library \autocite{geiger2022}, which provides a comprehensive framework that enables the formulation of composable $G$-equivariant operations for learning tasks involving three-dimensional data.
 
-We set the number of hidden features to 32 and restrict the $\operatorname{max}(l)$ to 2 for features and to 1 for attributes. Following this setting, the basis functions that form the hidden representations, $\mathbf{f}\_i$, are distributed so: \texttt{13x0e+3x1o+2x2e}, which is a symbolic notation within the e3nn framework. This nomenclature indicates that there are 13 or irreducible representations of type $l=0$, 3 of type $l=1$, and 2 of type $l=2$. Given that type $l=0$ has a single mode, type $l=1$ has 3 modes, and type $l=2$ has 5 modes, the total amounts to $13\times1 + 3\times3 + 2\times5 = 32$ basis functions. 
-The suffixes \texttt{e} and \texttt{o} serve as parity indicators, representing even and odd parities respectively among the basis functions. It is noteworthy that the parity properties of spherical harmonics are intrinsically linked to their type $l$.
+We set the number of hidden features to 32 and restrict the $\text{max}(l)$ to 2 for features and to 1 for attributes. Following this setting, the basis functions that form the hidden representations, $\mathbf{f}\_i$, are distributed so: `13x0e+3x1o+2x2e`, which is a symbolic notation within the e3nn framework. This nomenclature indicates that there are 13 or irreducible representations of type $l=0$, 3 of type $l=1$, and 2 of type $l=2$. Given that type $l=0$ has a single mode, type $l=1$ has 3 modes, and type $l=2$ has 5 modes, the total amounts to $13\times1 + 3\times3 + 2\times5 = 32$ basis functions. 
+The suffixes `e` and `o` serve as parity indicators, representing even and odd parities respectively among the basis functions. It is noteworthy that the parity properties of spherical harmonics are intrinsically linked to their type $l$.
 
 Parity transformation or parity inversion is the flip in the sign of spatial coordinates. For three-space, we can express this as:
-$
-\mathbf{P}:\left(\begin{smallmatrix}
-x \,
-y \,
-z
-\end{smallmatrix}\right)^T \mapsto 
-\left(\begin{smallmatrix}
--x \,
--y \,
--z
-\end{smallmatrix}\right)^T 
-$. 
+$`\mathbf{P}:\left(\begin{smallmatrix} x \, y \, z \end{smallmatrix}\right)^T \mapsto \left(\begin{smallmatrix} -x \, -y \, -z \end{smallmatrix}\right)^T`$. 
 Upon execution of this transformation, the spatial coordinates are inverted relative to the origin of the coordinate system. 
-Two irreducible representations of parity are possible. An object possessing even parity (\( P=1 \)) remains invariant upon undergoing a parity transformation. Conversely, an object with odd parity (\( P=-1 \)) becomes the negation of its original state following the transformation. 
+Two irreducible representations of parity are possible. An object possessing even parity ($P=1$) remains invariant upon undergoing a parity transformation. Conversely, an object with odd parity ($P=-1$) becomes the negation of its original state following the transformation. 
 For instance, vectors are odd; they will change their sign under parity transformation. 
 On the other hand, the cross product of two vectors yields an even quantity, termed a pseudovector, which remains invariant under inversion of the coordinate frame.
 
 
 The Clebsch-Gordan tensor product, allowing for the combination of tensors of different types into a new, composite tensor space, facilitates the interaction between spherical harmonics of various types. Otherwise, the model would be restricted to linear combinations involving only the harmonics of identical types. Such limitations would effectively preclude any interaction between, for instance, scalar spherical harmonics of type 0 and their vector-valued counterparts. 
 
-It is crucial to emphasise that not all combinations of tensor types are possible. When considering two input representations—or spherical harmonics—of types \(l\_1\) and \(l\_2\), the output representations must conform to type \(l\), and are subject to the inequality \(|l\_1 - l\_2| \leq l \leq l\_1 + l\_2\).
+It is crucial to emphasise that not all combinations of tensor types are possible. When considering two input representations—or spherical harmonics—of types $l\_1$ and $l\_2$, the output representations must conform to type $l$, and are subject to the inequality $|l\_1 - l\_2| \leq l \leq l\_1 + l\_2$.
 
 
-Consider input representations specified as \texttt{5x0e+5x1e} and \texttt{6x0e+4x1e}, and an output defined as \texttt{15x0e+3x1e}. In this setting, there are 960 compatible paths, each output being a learned weighted sum over these paths. This flexibility permits outputs with any specified multiplicity. In the given example, there exist \(5 \times 4 + 5 \times 6 + 5 \times 4 = 70\) paths conducive to creating a representation of type \(l=1\) (\texttt{1e}). Given that our output specification demands only three such representations, each of these would constitute a weighted sum of the 70 possible paths, or representations of type \(l=1\).
+Consider input representations specified as `5x0e+5x1e` and `6x0e+4x1e`, and an output defined as `15x0e+3x1e`. In this setting, there are 960 compatible paths, each output being a learned weighted sum over these paths. This flexibility permits outputs with any specified multiplicity. In the given example, there exist $5 \times 4 + 5 \times 6 + 5 \times 4 = 70$ paths conducive to creating a representation of type $l=1$ (`1e`). Given that our output specification demands only three such representations, each of these would constitute a weighted sum of the 70 possible paths, or representations of type $l=1$.
 
-The nonlinearity is implemented using a gated sum, as specified by Equation \(\ref{eq3}\), in order to fulfill the requirement of maintaining $G$-equivariance within the network architecture.
+The nonlinearity is implemented using a gated sum, as specified by Equation $\ref{eq3}$, in order to fulfill the requirement of maintaining $G$-equivariance within the network architecture.
 
 
 
