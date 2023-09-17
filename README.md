@@ -1,5 +1,5 @@
 
-# Experiment: 3DGS20 - Force Prediction in 3D Graphic Statics
+# 3DGS20 - Force Prediction in 3D Graphic Statics
 
 ## Dataset
 
