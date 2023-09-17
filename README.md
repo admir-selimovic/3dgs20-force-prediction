@@ -31,7 +31,7 @@ $$\mathbf{a}\_{\tau\_i} = \lVert \mathbf{p}\_j - \mathbf{p}\_i \rVert$$
 Converting feature vectors $\mathbf{x}\_{\sigma\_i}$, attribute vectors $\mathbf{a}\_{\tau\_i}$, and ground truth vectors $\mathbf{y}\_{\sigma\_i}$ into composite steerable vectors necessitates the specification of the types $l$ of basis functions involved, as well as the multiplicities of each type. 
 A type-$l$ vector, characterised by its dimension $2l+1$, pertains to scalar quantities if $l=0$, to vectors if $l=1$, and to rank-2 tensors if $l=2$. Higher orders ($l > 2$) are generally less prevalent in practice. Importantly, multiple basis functions of an identical type $l$ may co-exist within the same representation. 
 
-For the effective implementation of composite steerable vectors and irreducible representations, we utilise the \textit{e3nn} library \autocite{geiger2022}, which provides a comprehensive framework that enables the formulation of composable $G$-morphic operations for learning tasks involving three-dimensional data.
+For the effective implementation of composite steerable vectors and irreducible representations, we utilise the [e33nn](https://github.com/e3nn) library which provides a comprehensive framework that enables the formulation of composable $G$-morphic operations for learning tasks involving three-dimensional data.
 
 We set the number of hidden features to 32 and restrict the $\text{max}(l)$ to 2 for features and to 1 for attributes. Following this setting, the basis functions that form the hidden representations, $\mathbf{f}\_i$, are distributed so: `13x0e+3x1o+2x2e`, which is a symbolic notation within the e3nn framework. This nomenclature indicates that there are 13 or irreducible representations of type $l=0$, 3 of type $l=1$, and 2 of type $l=2$. Given that type $l=0$ has a single mode, type $l=1$ has 3 modes, and type $l=2$ has 5 modes, the total amounts to $13\times1 + 3\times3 + 2\times5 = 32$ basis functions. 
 The suffixes `e` and `o` serve as parity indicators, representing even and odd parities respectively among the basis functions. It is noteworthy that the parity properties of spherical harmonics are intrinsically linked to their type $l$.
@@ -67,9 +67,9 @@ The training is configured with an initial learning rate of $3e^{-4}$ and uses a
 *Comparison of Mean Absolute Error (MAE) scores for the methods with scalar and non-scalar features.*
 
 | G-morphic | Nonscal. | MAE | Time [s] |
-|-------|----------|-----|----------|
-| +     | -        | .0204±.00019 | .0159 |
-| +     | +        | **.0186±.00015** | .0165 |
+|-----------|----------|-----|----------|
+| +         | -        | .0204±.00019 | .0159 |
+| +         | +        | **.0186±.00015** | .0165 |
 
 *Comparative performance metrics for three methods: (a) non-G-map and scalar features, (b) G-map but scalar features, and (c) G-map and nonscalar features methods. Forward times for a batch size of 64 samples; executed on a GeForce RTX 3090 Ti GPU.*
 
