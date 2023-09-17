@@ -73,8 +73,6 @@ The forward time for the $G$-morphic and nonscalar method is comparable to the t
 
 Despite the promising outcomes, the $G$-morphic and nonscalar method is not devoid of limitations. For example, the validation of the method has thus far been constrained to synthetic datasets, without empirical substantiation through real-world structures. Future endeavours should aim to corroborate the efficacy of the model utilising datasets derived from actual physical configurations.
 
-In sum, the $G$-morphic and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design. It outperforms alternative methods in terms of accuracy without compromising on computational efficiency. 
-
 <div align="center">
   <img src="img/mp-nonscal-scal-comparison.png" width="400">
 </div>
@@ -92,3 +90,5 @@ In sum, the $G$-morphic and nonscalar method constitutes a robust and computatio
 </div>
 
 *MAE density at complex-level across the validation dataset.*
+
+In sum, the $G$-morphic and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design. It outperforms alternative methods in terms of accuracy without compromising on computational efficiency.
