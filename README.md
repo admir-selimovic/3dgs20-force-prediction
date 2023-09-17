@@ -2,8 +2,6 @@
 
 ## Dataset
 
-The 3DGS20 dataset is synthesized using 3D Graphic Statics, a tool for structural design and engineering. This dataset is tailored for the generation of compression-only funicular structures along with their corresponding force diagrams.
-
 The dataset comprises 30,000 1-complexes, each containing 20 0-cells and 34 1-cells. For each 1-cell, a magnitude is assigned that quantifies the compression force exerted on it. The dataset also includes feature vectors and attributes for each cell.
 
 ![Processed data sample](img/3d_graphic_statics_data_example_prepro-annot-v3.png)
