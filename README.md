@@ -76,21 +76,19 @@ Despite the promising outcomes, the $G$-morphic and nonscalar method is not devo
 In sum, the $G$-morphic and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design. It outperforms alternative methods in terms of accuracy without compromising on computational efficiency. 
 
 <div align="center">
-  <img src="img/mp-nonscal-scal-comparison.png" width="500">
+  <img src="img/mp-nonscal-scal-comparison.png" width="400">
 </div>
+
 *Comparison of Mean Absolute Error (MAE) scores for the methods with scalar and non-scalar features.*
+
+<div align="center">
+  <img src="img/mae-sh.png" width="400">
+</div>
+
+*MAE on the validation dataset. Glyph plot of the MAE in spherical harmonic form for a random data sample, evaluated across the dimensionality of the tensor in the codomain $`\mathbb{R}^C`$. Scalar values denote the average cell-level MAE.*
 
 <div align="center">
   <img src="img/3dgs20-complex-level-mae-density.png" width="250">
 </div>
+
 *MAE density at complex-level across the validation dataset.*
-
-
-## Limitations and Future Work
-
-Validation of the method has been constrained to synthetic datasets. Future work should aim to validate the model using datasets derived from actual physical configurations.
-
-## Summary
-
-The G-equivariant and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design.
-
