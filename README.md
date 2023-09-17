@@ -61,7 +61,7 @@ The training is configured with an initial learning rate of $3e^{-4}$ and uses a
 ## Results
 
 <div align="center">
-  <img src="img/mp-nonscal-scal-comparison.png" width="400">
+  <img src="img/mp-nonscal-scal-comparison.png" width="450">
 </div>
 
 *Comparison of Mean Absolute Error (MAE) scores for the methods with scalar and non-scalar features.*
@@ -73,7 +73,7 @@ The training is configured with an initial learning rate of $3e^{-4}$ and uses a
 
 *Comparative performance metrics for three methods: (a) non-G-map and scalar features, (b) G-map but scalar features, and (c) G-map and nonscalar features methods. Forward times for a batch size of 64 samples; executed on a GeForce RTX 3090 Ti GPU.*
 
-As shown in the table above, the $G$-morphic and nonscalar features method significantly outperforms the non-$G$-morphic and scalar method as well as the $G$-morphic and scalar alternative. 
+As shown in the table above, the $G$-morphic and nonscalar features method significantly outperforms the non-$`G`$-morphic and scalar method as well as the $G$-morphic and scalar alternative. 
 The forward time for the $G$-morphic and nonscalar method is comparable to the times for the other methods, suggesting that the increase in prediction accuracy does not come at the cost of computational efficiency.
 
 Despite the promising outcomes, the $G$-morphic and nonscalar method is not devoid of limitations. For example, the validation of the method has thus far been constrained to synthetic datasets, without empirical substantiation through real-world structures. Future endeavours should aim to corroborate the efficacy of the model utilising datasets derived from actual physical configurations.
