@@ -29,7 +29,7 @@ $$\mathbf{a}\_{\tau\_i} = \lVert \mathbf{p}\_j - \mathbf{p}\_i \rVert$$
 Converting feature vectors $\mathbf{x}\_{\sigma\_i}$, attribute vectors $\mathbf{a}\_{\tau\_i}$, and ground truth vectors $\mathbf{y}\_{\sigma\_i}$ into composite steerable vectors necessitates the specification of the types $l$ of basis functions involved, as well as the multiplicities of each type. 
 A type-$l$ vector, characterised by its dimension $2l+1$, pertains to scalar quantities if $l=0$, to vectors if $l=1$, and to rank-2 tensors if $l=2$. Higher orders ($l > 2$) are generally less prevalent in practice. Importantly, multiple basis functions of an identical type $l$ may co-exist within the same representation. 
 
-For the effective implementation of composite steerable vectors and irreducible representations, we utilise the \textit{e3nn} library \autocite{geiger2022}, which provides a comprehensive framework that enables the formulation of composable $G$-equivariant operations for learning tasks involving three-dimensional data.
+For the effective implementation of composite steerable vectors and irreducible representations, we utilise the \textit{e3nn} library \autocite{geiger2022}, which provides a comprehensive framework that enables the formulation of composable $G$-morphic operations for learning tasks involving three-dimensional data.
 
 We set the number of hidden features to 32 and restrict the $\text{max}(l)$ to 2 for features and to 1 for attributes. Following this setting, the basis functions that form the hidden representations, $\mathbf{f}\_i$, are distributed so: `13x0e+3x1o+2x2e`, which is a symbolic notation within the e3nn framework. This nomenclature indicates that there are 13 or irreducible representations of type $l=0$, 3 of type $l=1$, and 2 of type $l=2$. Given that type $l=0$ has a single mode, type $l=1$ has 3 modes, and type $l=2$ has 5 modes, the total amounts to $13\times1 + 3\times3 + 2\times5 = 32$ basis functions. 
 The suffixes `e` and `o` serve as parity indicators, representing even and odd parities respectively among the basis functions. It is noteworthy that the parity properties of spherical harmonics are intrinsically linked to their type $l$.
@@ -58,9 +58,6 @@ The training is configured with an initial learning rate of $3e^{-4}$ and uses a
 
 
 
-## Training
-
-The model is trained using a batch size of 64 with an initial learning rate of $3e^{-4}$. The optimization criterion is the Mean Absolute Error (MAE) between the predicted and ground-truth force vectors.
 
 ## Results
 
@@ -69,6 +66,16 @@ The model is trained using a batch size of 64 with an initial learning rate of $
 | G-map & Nonscal. | .xxxx±.xxxxx | .xxxx |
 | + & - | .0204±.00019 | .xxxx |
 | + & + | **.0186±.00015** | .0165 |
+
+As shown in the table, the $G$-morphic and nonscalar features method significantly outperforms the non-$G$-morphic and scalar method as well as the $G$-morphic and scalar alternative. 
+
+The forward time for the $G$-morphic and nonscalar method is comparable to the times for the other methods, suggesting that the increase in prediction accuracy does not come at the cost of computational efficiency.
+
+Despite the promising outcomes, the $G$-morphic and nonscalar method is not devoid of limitations. For example, the validation of the method has thus far been constrained to synthetic datasets, without empirical substantiation through real-world structures. Future endeavours should aim to corroborate the efficacy of the model utilising datasets derived from actual physical configurations.
+
+In summary, the $G$-morphic and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design. It outperforms alternative methods in terms of accuracy without compromising on computational efficiency. 
+
+
 
 ![Comparison of MAE](img/mp-steer-non-steer-comparison.png)
 ![MAE on Validation Dataset](img/mae-sh-sample-v3-upscaled-bw.png)
