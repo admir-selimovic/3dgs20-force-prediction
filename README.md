@@ -1,5 +1,6 @@
 
-# 3DGS20 - Force Prediction in 3D Graphic Statics
+# 3DGS20 - Force Prediction in Structural Design
+
 
 ## Dataset
 
@@ -24,6 +25,7 @@ where $\mathbf{d}\_{ji} = \mathbf{p}\_i - \mathbf{p}\_j$.
 Lastly, each $1$-cell $\tau\_{i}$ is associated with an attribute $\mathbf{a}\_{\tau\_i}$, which is calculated as the Euclidean distance between the position vectors of its constituent $0$-cells:
 $$\mathbf{a}\_{\tau\_i} = \lVert \mathbf{p}\_j - \mathbf{p}\_i \rVert$$
 
+
 ## Implementation of composite harmonic expansions and CG TP
 
 Converting feature vectors $\mathbf{x}\_{\sigma\_i}$, attribute vectors $\mathbf{a}\_{\tau\_i}$, and ground truth vectors $\mathbf{y}\_{\sigma\_i}$ into composite steerable vectors necessitates the specification of the types $l$ of basis functions involved, as well as the multiplicities of each type. 
@@ -41,7 +43,6 @@ Two irreducible representations of parity are possible. An object possessing eve
 For instance, vectors are odd; they will change their sign under parity transformation. 
 On the other hand, the cross product of two vectors yields an even quantity, termed a pseudovector, which remains invariant under inversion of the coordinate frame.
 
-
 The Clebsch-Gordan tensor product, allowing for the combination of tensors of different types into a new, composite tensor space, facilitates the interaction between spherical harmonics of various types. Otherwise, the model would be restricted to linear combinations involving only the harmonics of identical types. Such limitations would effectively preclude any interaction between, for instance, scalar spherical harmonics of type 0 and their vector-valued counterparts. 
 
 It is crucial to emphasise that not all combinations of tensor types are possible. When considering two input representations—or spherical harmonics—of types $l\_1$ and $l\_2$, the output representations must conform to type $l$, and are subject to the inequality $|l\_1 - l\_2| \leq l \leq l\_1 + l\_2$.
@@ -57,9 +58,13 @@ The harmonic expansions are restricted to a maximum degree, $l$, of 1. To this e
 The training is configured with an initial learning rate of $3e^{-4}$ and uses a cosine annealing learning rate scheduler. 
 
 
-
-
 ## Results
+
+<div align="center">
+  <img src="img/mp-nonscal-scal-comparison.png" width="400">
+</div>
+
+*Comparison of Mean Absolute Error (MAE) scores for the methods with scalar and non-scalar features.*
 
 | G-morphic | Nonscal. | MAE | Time [s] |
 |-------|----------|-----|----------|
@@ -74,21 +79,13 @@ The forward time for the $G$-morphic and nonscalar method is comparable to the t
 Despite the promising outcomes, the $G$-morphic and nonscalar method is not devoid of limitations. For example, the validation of the method has thus far been constrained to synthetic datasets, without empirical substantiation through real-world structures. Future endeavours should aim to corroborate the efficacy of the model utilising datasets derived from actual physical configurations.
 
 <div align="center">
-  <img src="img/mp-nonscal-scal-comparison.png" width="400">
-</div>
-
-*Comparison of Mean Absolute Error (MAE) scores for the methods with scalar and non-scalar features.*
-
-<div align="center">
   <img src="img/mae-sh.png" width="400">
 </div>
-
-*MAE on the validation dataset. Glyph plot of the MAE in spherical harmonic form for a random data sample, evaluated across the dimensionality of the tensor in the codomain $`\mathbb{R}^C`$. Scalar values denote the average cell-level MAE.*
 
 <div align="center">
   <img src="img/3dgs20-complex-level-mae-density.png" width="250">
 </div>
 
-*MAE density at complex-level across the validation dataset.*
+**Above:** *MAE on the validation dataset. Glyph plot of the MAE in spherical harmonic form for a random data sample, evaluated across the dimensionality of the tensor in the codomain $`\mathbb{R}^C`$. Scalar values denote the average cell-level MAE.* **Below:** *MAE density at complex-level across the validation dataset.*
 
 In sum, the $G$-morphic and nonscalar method constitutes a robust and computationally efficient framework for the accurate prediction of physical properties in structural design. It outperforms alternative methods in terms of accuracy without compromising on computational efficiency.
