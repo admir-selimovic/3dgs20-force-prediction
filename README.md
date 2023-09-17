@@ -24,9 +24,6 @@ where $\mathbf{d}\_{ji} = \mathbf{p}\_i - \mathbf{p}\_j$.
 Lastly, each $1$-cell $\tau\_{i}$ is associated with an attribute $\mathbf{a}\_{\tau\_i}$, which is calculated as the Euclidean distance between the position vectors of its constituent $0$-cells:
 $$\mathbf{a}\_{\tau\_i} = \lVert \mathbf{p}\_j - \mathbf{p}\_i \rVert$$
 
-
-
-
 ## Implementation of composite harmonic expansions and CG TP
 
 Converting feature vectors $\mathbf{x}\_{\sigma\_i}$, attribute vectors $\mathbf{a}\_{\tau\_i}$, and ground truth vectors $\mathbf{y}\_{\sigma\_i}$ into composite steerable vectors necessitates the specification of the types $l$ of basis functions involved, as well as the multiplicities of each type. 
@@ -49,14 +46,15 @@ The Clebsch-Gordan tensor product, allowing for the combination of tensors of di
 
 It is crucial to emphasise that not all combinations of tensor types are possible. When considering two input representations—or spherical harmonics—of types $l\_1$ and $l\_2$, the output representations must conform to type $l$, and are subject to the inequality $|l\_1 - l\_2| \leq l \leq l\_1 + l\_2$.
 
-
 Consider input representations specified as `5x0e+5x1e` and `6x0e+4x1e`, and an output defined as `15x0e+3x1e`. In this setting, there are 960 compatible paths, each output being a learned weighted sum over these paths. This flexibility permits outputs with any specified multiplicity. In the given example, there exist $5 \times 4 + 5 \times 6 + 5 \times 4 = 70$ paths conducive to creating a representation of type $l=1$ (`1e`). Given that our output specification demands only three such representations, each of these would constitute a weighted sum of the 70 possible paths, or representations of type $l=1$.
 
-The nonlinearity is implemented using a gated sum, as specified by Equation $\ref{eq3}$, in order to fulfill the requirement of maintaining $G$-equivariance within the network architecture.
 
+## Training
 
-
-
+The task at hand involves regressing the forces tensor, $\hat{\mathbf{y}}$, which has a dimensionality of $|\sigma| \times \mathbb{R}^C = 20 \times 3$. The optimisation criterion is the Mean Absolute Error (MAE) between the predicted and ground-truth force vectors. 
+The harmonic expansions are restricted to a maximum degree, $l$, of 1. To this end, the input features and attributes are specified in the form `1x0e+1x1o`. A total of 32 hidden features are allocated, adopting the form `130x0e+42x1o`. 
+24,000 complexes are designated for the training set, while an additional 6,000 are reserved for validation. The model consists of three message-passing layers, has a total parameter count of 692,000, and is trained using a batch size of 64 and. 
+The training is configured with an initial learning rate of $3e^{-4}$ and uses a cosine annealing learning rate scheduler. 
 
 
 
