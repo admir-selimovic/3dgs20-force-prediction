@@ -4,7 +4,19 @@
 
 The dataset comprises 30,000 1-complexes, each containing 20 0-cells and 34 1-cells. For each 1-cell, a magnitude is assigned that quantifies the compression force exerted on it. The dataset also includes feature vectors and attributes for each cell.
 
-![Processed data sample](img/3d_graphic_statics_data_example_prepro-annot-v3.png)
+<div align="center">
+  <figure>
+    <div>
+      <img src="img/3d_graphic_statics_data_example_prepro-annot-v3.png" width="600">
+    </div>
+    <div style="text-align:center;">
+      <figcaption>Processed data sample. Left: compression force vectors $\mathbf{f}_{\tau_{ij}} \subset \mathbf{y}_{\sigma_i}$. Right: glyph plot of the spherical harmonic embeddings $\tilde{\mathbf{y}}_{\sigma_{i}}$.</figcaption>
+    </div>
+  </figure>
+</div>
+
+
+
 
 ## Computational Implementation
 
