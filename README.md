@@ -8,7 +8,7 @@
   <img src="img/3d_graphic_statics_data_example_prepro-annot-v3.png" width="600">
 </div>
 
-*Processed data sample. Left: compression force vectors $`\mathbf{f}_{\tau_{ij}} \subset \mathbf{y}_{\sigma_i}`$. Right: glyph plot of the spherical harmonic embeddings $`\tilde{\mathbf{y}}\_{\sigma\_{i}}`$.*
+*Processed data sample. Left: compression force vectors $`\mathbf{f}_{\tau_{ij}} \subset \mathbf{y}_{\sigma_i}`$. Right: glyph plot of the spherical harmonic embeddings $`\tilde{\mathbf{y}}_{\sigma\_{i}}`$.*
 
 The dataset comprises 30,000 $1$-complexes. Within each complex, there are 20 $0$-cells, $\sigma\_i$, characterised by a positional vector $\mathbf{p}\_i \in \mathbb{R}^3$. Each complex contains 34 $1$-cells, $\tau\_{ij} = \{\sigma\_i,\sigma\_j\}$.
 
