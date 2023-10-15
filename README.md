@@ -1,5 +1,5 @@
 
-# 3DGS20 - Force Prediction in 3D Structural Design with GCXNN
+# Force Prediction in 3D Structural Design
 
 
 ## Dataset
